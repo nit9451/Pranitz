@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "name": "pranitz-ai",
+  "builds": [
+    {
+      "src": "server/production.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/build/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "server/production.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "client/build/$1"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "server/production.js": {
+      "maxDuration": 30
+    }
+  }
+}
