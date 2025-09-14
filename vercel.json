@@ -1,20 +1,18 @@
 {
   "version": 2,
   "name": "pranitz-ai",
+  "buildCommand": "cd client && npm install && npm run build",
+  "outputDirectory": "client/build",
   "builds": [
     {
-      "src": "server/production.js",
+      "src": "api/chat.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "client/build/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "server/production.js"
+      "src": "/api/chat",
+      "dest": "api/chat.js"
     },
     {
       "src": "/(.*)",
@@ -23,10 +21,5 @@
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "functions": {
-    "server/production.js": {
-      "maxDuration": 30
-    }
   }
 }
